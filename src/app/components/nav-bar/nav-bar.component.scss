@@ -1,0 +1,48 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/mixins";
+
+mat-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 6;
+}
+
+mat-toolbar-row {
+    position: relative;
+    justify-content: center;
+}
+
+.buttons {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+
+    &.right {
+        right: 16px;
+    }
+
+    &.left {
+        left: 16px;
+    }
+    
+}
+
+.header-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .logo {
+        height: 20px;
+    }
+
+    h1 {
+        span {
+            margin: 0 10px 0 2px;
+        }
+    }
+}

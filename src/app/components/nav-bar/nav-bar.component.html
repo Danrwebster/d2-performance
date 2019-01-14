@@ -1,0 +1,25 @@
+<mat-toolbar color="primary" class="mat-elevation-z5" (click)="closeAll()">
+	<mat-toolbar-row>
+		<div class="buttons left" *ngIf="showMenu">
+			<div class="menu-button">
+				<button mat-icon-button (click)="toggleSideNav()">
+					<mat-icon aria-label="Menu">menu</mat-icon>
+				</button>
+			</div>
+		</div>
+		<button mat-button routerLink="">
+			<div class="header-logo">
+				<img class="logo" src="../../../assets/images/destiny-logo.svg" />
+				<h1><span>2</span>Performance</h1>
+			</div>
+		</button>
+		<div class="buttons right">
+			<div class="search-button">
+				<button mat-icon-button (click)="toggleSearch()">
+					<mat-icon aria-label="Search">search</mat-icon>
+				</button>
+			</div>
+		</div>
+	</mat-toolbar-row>
+</mat-toolbar>
+<app-search-bar *ngIf="showSearch" (close)="toggleSearch()"></app-search-bar>

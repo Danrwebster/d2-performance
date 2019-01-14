@@ -1,0 +1,17 @@
+@mixin breakpoint($point) {
+    @if $point == desktop {
+        @media (min-width: 1024px) {
+            @content;
+        }
+    }
+    @else if $point == tablet {
+        @media (min-width: 839px) {
+            @content;
+        }
+    }
+    @else if $point == mobile {
+        @media (max-width: 600px) {
+            @content;
+        }
+    }
+}

@@ -1,0 +1,69 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/mixins";
+
+.global-container {
+    height: 100vh;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+}
+
+.sidenav-container {
+    flex-grow: 1;
+    
+    .sidenav {
+        background-color: $primary-dark;
+        padding: $header-large 0 0;
+
+        @include breakpoint(mobile) {
+            padding: $header-small 0 0;
+        }
+    }
+    .content {
+        display: flex;
+        flex-direction: column;
+        padding: $header-large 0 0;
+
+        @include breakpoint(mobile) {
+            padding: $header-small 0 0;
+        }
+    }    
+}
+
+mat-expansion-panel {
+    background: $primary-dark;
+
+    mat-expansion-panel-header {
+        mat-panel-title {
+            color: $primary-light;
+        }
+    }
+}
+
+::ng-deep {
+    .mat-drawer-container {
+        background-color: transparent;
+    }
+
+    mat-expansion-panel-header {
+        background: $primary-dark !important;
+    }
+
+    .mat-expansion-indicator {
+        &:after {
+            color: rgba(255, 255, 255, 1) !important;
+
+            .selected & {
+                color: $primary-accent !important;
+            }
+        }
+    }
+    
+    .mat-list-item-content {
+        color: rgba(255, 255, 255, 1);
+
+        .selected & {
+            color: $primary-accent !important;
+        }
+    }
+}

@@ -1,0 +1,31 @@
+@import url("https://use.typekit.net/oyo0ipp.css");
+
+@import "../node_modules/@angular/material/theming";
+@import "./assets/styles/theme";
+@import "./assets/styles/mixins";
+
+@include mat-core;
+
+$app-primary: mat-palette($mat-black);
+$app-accent: mat-palette($mat-blue);
+
+$mat-light-theme: mat-light-theme($app-primary, $app-accent);
+
+@include angular-material-theme($mat-light-theme);
+
+html {
+    height: 100vh;
+    width: 100vw;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    background-color: map-get($mat-black, 50);
+    font-family: adobe-garamond-pro, serif !important;
+}
+
+h1, h2, h3, h4 {
+    font-family: neue-haas-grotesk-display, sans-serif !important;
+    font-weight: 500;
+}

@@ -1,0 +1,9 @@
+@import "./theme";
+
+$header-large: 64px;
+$header-small: 56px;
+
+$primary-dark: map-get($mat-black, 500);
+$primary-light: map-get($mat-black, 50);
+$primary-accent: map-get($mat-blue, 500);
+$primary-warning: map-get($mat-orange, 500);

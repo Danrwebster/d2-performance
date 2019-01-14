@@ -1,0 +1,42 @@
+@import "../../../../assets/styles/variables";
+@import "../../../../assets/styles/mixins";
+
+.global-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+mat-chip-list {
+    margin: 16px 8px;
+}
+
+mat-chip {
+    font-family: neue-haas-grotesk-display, sans-serif !important;
+    font-weight: 500;
+}
+
+mat-card {
+    width: 320px;
+    margin: 0 8px 16px;
+
+    @include breakpoint(mobile) {
+        margin: 0 0 16px;
+    }
+
+
+    .avatar {
+        background-size: cover;
+    }
+
+    mat-card-title, mat-card-subtitle {
+        font-family: neue-haas-grotesk-display, sans-serif !important;
+        font-weight: bold;
+    }
+}
