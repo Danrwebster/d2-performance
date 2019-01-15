@@ -38,7 +38,7 @@ mat-card {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-start;
 
     @include breakpoint(mobile) {
         margin: 16px auto;
