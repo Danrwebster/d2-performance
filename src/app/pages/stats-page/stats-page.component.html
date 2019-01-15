@@ -7,7 +7,7 @@
 				<mat-card-subtitle>{{currentUser.displayName}}</mat-card-subtitle>
 			</mat-card-header>
 		</mat-card>
-		<div class="stats-container" [ngSwitch]="selected">
+		<ng-container [ngSwitch]="selected">
 			<app-all-stats *ngSwitchCase="'all-stats'"></app-all-stats>
 			<app-strike-stats *ngSwitchCase="'strike-stats'"></app-strike-stats>
 			<app-nightfall-stats *ngSwitchCase="'nightfall-stats'"></app-nightfall-stats>
@@ -19,6 +19,6 @@
 			<app-iron-banner-stats *ngSwitchCase="'iron-banner-stats'"></app-iron-banner-stats>
 			<app-trials-stats *ngSwitchCase="'trials-stats'"></app-trials-stats>
 			<app-all-pvp-stats *ngSwitchCase="'all-pvp-stats'"></app-all-pvp-stats>
-		</div>
+		</ng-container>
 	</div>
 </div>

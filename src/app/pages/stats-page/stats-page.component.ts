@@ -3,9 +3,10 @@ import { IMembershipProfile, IBungieNetUser } from 'src/app/bungie-api-shared/bu
 import { BUNGIE_CMS_ROOT } from 'src/app/bungie-api-shared/bungie-api-endpoints';
 import { Subscription } from 'rxjs';
 import { BungieService } from 'src/app/services/bungie.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { UserDataService } from 'src/app/services/user-data.service';
 import { MenuService } from 'src/app/services/menu.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
 	selector: 'app-stats-page',
@@ -19,38 +20,28 @@ export class StatsPageComponent implements OnInit, OnDestroy {
 	private _selected: string;
 
 	constructor(
-		private _bungieService: BungieService,
+		private _router: Router,
 		private _route: ActivatedRoute,
-		private _userDataService: UserDataService,
 		private _menuService: MenuService
 	) { }
 
 	ngOnInit() {
-		const paramSub = this._route.params.subscribe(params => {
-			this.searchMembership(params['id']);
-		});
-		this._subscription.add(paramSub);
+		this._currentUser = this._route.snapshot.data.MembershipProfile;
 
 		const showSelectedSub = this._menuService.showSelected().subscribe(value => {
 			this._selected = value;
 		});
 		this._subscription.add(showSelectedSub);
+
+		const routeSub = this._router.events.pipe(filter(event => event instanceof NavigationEnd))
+			.subscribe(() => {
+				this._currentUser = this._route.snapshot.data.MembershipProfile;
+			});
+		this._subscription.add(routeSub);
 	}
 
 	ngOnDestroy() {
 		this._subscription.unsubscribe();
-	}
-
-	public searchMembership(membershipId: string) {
-		const memberSub = this._bungieService.getMembershipInfo(membershipId).subscribe(data => {
-			if (data.Response) {
-				if (data.Response !== this._userDataService.currentUser) {
-					this._userDataService.addUser(data.Response);
-					this._currentUser = this._userDataService.currentUser;
-				}
-			}
-		});
-		this._subscription.add(memberSub);
 	}
 
 	public get currentUser(): IBungieNetUser {

@@ -11,8 +11,8 @@
                             </mat-panel-title>
                         </mat-expansion-panel-header>
                         <mat-list>
-                            <mat-list-item [class.selected]="selected(category.route)" [class.disabled]="disabled(menu.requiresUser)" *ngFor="let category of menu.subList"
-                                (click)="menuSelect(category.route, disabled(menu.requiresUser))">{{category.displayName}}</mat-list-item>
+                            <mat-list-item [class.selected]="selected(category.route)" [class.disabled]="disabled(category.requiresUser)" *ngFor="let category of menu.subList"
+                                (click)="menuSelect(category.route, disabled(category.requiresUser))">{{category.displayName}}</mat-list-item>
                         </mat-list>
                     </mat-expansion-panel>
                     <mat-list *ngIf="!menu.subList">

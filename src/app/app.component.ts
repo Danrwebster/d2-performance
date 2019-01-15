@@ -1,10 +1,11 @@
 import { takeUntil, filter } from 'rxjs/operators';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NotificationService } from './services/notification.service';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { MenuService, IMenuItem } from './services/menu.service';
 import { UserDataService } from './services/user-data.service';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
+import { IMembershipProfile } from './bungie-api-shared/bungie-api-interfaces';
 
 @Component({
 	selector: 'app-root',
@@ -16,14 +17,13 @@ export class AppComponent implements OnInit, OnDestroy {
 	private _unsubscribe$: Subject<void> = new Subject<void>();
 	private _showSideNav: boolean;
 	private _selected: string;
-	private _subscription = new Subscription;
+	private _currentUser: IMembershipProfile;
 
 	constructor(
 		private _notificationService: NotificationService,
 		private _menuService: MenuService,
 		private _userDataService: UserDataService,
-		private _router: Router,
-		private _route: ActivatedRoute
+		private _router: Router
 	) {
 		this._notificationService.notifyFeed.pipe(
 			takeUntil(this._unsubscribe$))
@@ -40,17 +40,19 @@ export class AppComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit() {
-		const sideNavSub = this._menuService.showSideNav().subscribe(value => {
+		this._menuService.showSideNav().subscribe(value => {
 			this._showSideNav = value;
 		});
-		this._subscription.add(sideNavSub);
 
-		const showSelectedSub = this._menuService.showSelected().subscribe(value => {
+		this._menuService.showSelected().subscribe(value => {
 			this._selected = value;
 		});
-		this._subscription.add(showSelectedSub);
 
-		const routeSub = this._router.events.pipe(filter(event => event instanceof NavigationEnd))
+		this._userDataService.userSource$.subscribe(user => {
+			this._currentUser = user;
+		});
+
+		this._router.events.pipe(filter(event => event instanceof NavigationEnd))
 			.subscribe(() => {
 				switch (this._router.url) {
 					case '/':
@@ -61,12 +63,6 @@ export class AppComponent implements OnInit, OnDestroy {
 						break;
 				}
 			});
-		this._subscription.add(routeSub);
-
-		const paramSub = this._route.params.subscribe(params => {
-			this._menuService.setSelected(params['mode']);
-		});
-		this._subscription.add(paramSub);
 	}
 
 	public menuSelect(value: string, disabled: boolean): void {
@@ -97,7 +93,6 @@ export class AppComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this._subscription.unsubscribe();
 		this._unsubscribe$.next();
 		this._unsubscribe$.complete();
 	}
@@ -106,7 +101,7 @@ export class AppComponent implements OnInit, OnDestroy {
 		if (!requiresUser) {
 			return false;
 		} else {
-			return this._userDataService.currentUser === undefined;
+			return this._currentUser === undefined;
 		}
 	}
 }
