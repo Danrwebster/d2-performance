@@ -7,7 +7,7 @@ export interface IBungieAPIResponse {
 	MessageData: any;
 }
 
-export interface IGeneralUser {
+export interface IBungieNetUser {
 	about: string;
 	blizzardDisplayName: string;
 	displayName: string;
@@ -29,4 +29,16 @@ export interface IGeneralUser {
 	uniqueName: string;
 	userTitle: number;
 	userTitleDisplay: string;
+}
+
+export interface IDestinyMembership {
+	iconPath: string;
+	membershipType: number;
+	membershipId: string;
+	displayName: string;
+}
+
+export interface IMembershipProfile {
+	destinyMemberships: IDestinyMembership[];
+	bungieNetUser: IBungieNetUser;
 }

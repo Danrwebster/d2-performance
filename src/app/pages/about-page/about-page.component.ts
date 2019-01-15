@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
-	selector: 'app-home-page',
-	templateUrl: './home-page.component.html',
-	styleUrls: ['./home-page.component.scss']
+	selector: 'app-about-page',
+	templateUrl: './about-page.component.html',
+	styleUrls: ['./about-page.component.scss']
 })
-export class HomePageComponent implements OnInit {
+export class AboutPageComponent implements OnInit {
 
 	constructor(
 		private _menuService: MenuService

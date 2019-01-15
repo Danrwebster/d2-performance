@@ -1,36 +1,24 @@
 <div class="global-container">
-	<mat-sidenav-container class="sidenav-container">
-		<mat-sidenav #sidenav class="sidenav" [opened]="showSideNav" [mode]="'over'" [fixedInViewport]="'true'">
-			<mat-accordion [displayMode]="'flat'">
-				<ng-container *ngFor="let menu of sideNaveMenu">
-					<mat-expansion-panel class="mat-elevation-z0" *ngIf="menu.subList">
-						<mat-expansion-panel-header>
-							<mat-panel-title>
-								{{menu.name}}
-							</mat-panel-title>
-						</mat-expansion-panel-header>
-						<mat-list>
-							<mat-list-item [class.selected]="category.mode === statSelection" *ngFor="let category of menu.subList" (click)="selectStats(category.mode)">{{category.name}}</mat-list-item>
-						</mat-list>
-					</mat-expansion-panel>
-					<mat-list *ngIf="!menu.subList">
-						<mat-list-item [class.selected]="menu.name === statSelection" (click)="selectStats(menu.name)">{{menu.name}}</mat-list-item>
-					</mat-list>
-				</ng-container>
-			</mat-accordion>
-		</mat-sidenav>
-		<mat-sidenav-content class="content" [ngSwitch]="statSelection">
-			<app-all-stats *ngSwitchCase="'All Stats'"></app-all-stats>
-			<app-strike-stats *ngSwitchCase="'strike'"></app-strike-stats>
-			<app-nightfall-stats *ngSwitchCase="'nightfall'"></app-nightfall-stats>
-			<app-raid-stats *ngSwitchCase="'raid'"></app-raid-stats>
-			<app-all-pve-stats *ngSwitchCase="'allpve'"></app-all-pve-stats>
-			<app-gambit-stats *ngSwitchCase="'gambit'"></app-gambit-stats>
-			<app-control-stats *ngSwitchCase="'control'"></app-control-stats>
-			<app-clash-stats *ngSwitchCase="'clash'"></app-clash-stats>
-			<app-iron-banner-stats *ngSwitchCase="'ironbanner'"></app-iron-banner-stats>
-			<app-trials-stats *ngSwitchCase="'trialsofthenine'"></app-trials-stats>
-			<app-all-pvp-stats *ngSwitchCase="'allpvp'"></app-all-pvp-stats>
-		</mat-sidenav-content>
-	</mat-sidenav-container>
+	<div class="container">
+		<mat-card *ngIf="currentUser" [ngStyle]="{ 'background-image' : (currentUser.profileThemeName | themeBackground) | styleURL }">
+			<mat-card-header>
+				<div mat-card-avatar class="avatar" [ngStyle]="{ 'background-image' : (BungieCMSRootPath + currentUser.profilePicturePath) | styleURL }"></div>
+				<mat-card-title>{{currentUser.blizzardDisplayName}}</mat-card-title>
+				<mat-card-subtitle>{{currentUser.displayName}}</mat-card-subtitle>
+			</mat-card-header>
+		</mat-card>
+		<div class="stats-container" [ngSwitch]="selected">
+			<app-all-stats *ngSwitchCase="'all-stats'"></app-all-stats>
+			<app-strike-stats *ngSwitchCase="'strike-stats'"></app-strike-stats>
+			<app-nightfall-stats *ngSwitchCase="'nightfall-stats'"></app-nightfall-stats>
+			<app-raid-stats *ngSwitchCase="'raid-stats'"></app-raid-stats>
+			<app-all-pve-stats *ngSwitchCase="'all-pve-stats'"></app-all-pve-stats>
+			<app-gambit-stats *ngSwitchCase="'gambit-stats'"></app-gambit-stats>
+			<app-control-stats *ngSwitchCase="'control-stats'"></app-control-stats>
+			<app-clash-stats *ngSwitchCase="'clash-stats'"></app-clash-stats>
+			<app-iron-banner-stats *ngSwitchCase="'iron-banner-stats'"></app-iron-banner-stats>
+			<app-trials-stats *ngSwitchCase="'trials-stats'"></app-trials-stats>
+			<app-all-pvp-stats *ngSwitchCase="'all-pvp-stats'"></app-all-pvp-stats>
+		</div>
+	</div>
 </div>

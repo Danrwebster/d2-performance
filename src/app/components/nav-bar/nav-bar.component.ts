@@ -3,7 +3,6 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MenuService } from 'src/app/services/menu.service';
 import { Subscription } from 'rxjs';
-import { url } from 'inspector';
 
 @Component({
 	selector: 'app-nav-bar',
@@ -12,7 +11,6 @@ import { url } from 'inspector';
 })
 export class NavBarComponent implements OnInit, OnDestroy {
 
-	private _showMenu: boolean;
 	private _showSearchBar: boolean;
 	private _showSideNav: boolean;
 	private _subscription = new Subscription;
@@ -27,7 +25,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
 			.subscribe(() => {
 				this._menuService.setSideNav(false);
 				this._menuService.setSearchBar(false);
-				this._showMenu = this._router.url === '/' ? false : true;
 			});
 		this._subscription.add(routeSub);
 
@@ -56,10 +53,6 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
 	public get showSearch(): boolean {
 		return this._showSearchBar;
-	}
-
-	public get showMenu(): boolean {
-		return this._showMenu;
 	}
 
 	public toggleSideNav() {

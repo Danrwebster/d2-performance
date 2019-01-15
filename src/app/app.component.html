@@ -1,2 +1,28 @@
 <app-nav-bar></app-nav-bar>
-<router-outlet></router-outlet>
+<div class="global-conainter">
+    <mat-sidenav-container class="sidenav-container" (backdropClick)="closeSideNav()">
+        <mat-sidenav #sidenav class="sidenav" [opened]="showSideNav" [mode]="'over'" [fixedInViewport]="'true'">
+            <mat-accordion [displayMode]="'flat'">
+                <ng-container *ngFor="let menu of sideNavMenu">
+                    <mat-expansion-panel class="mat-elevation-z0" *ngIf="menu.subList">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{menu.displayName}}
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-list>
+                            <mat-list-item [class.selected]="selected(category.route)" [class.disabled]="disabled(menu.requiresUser)" *ngFor="let category of menu.subList"
+                                (click)="menuSelect(category.route, disabled(menu.requiresUser))">{{category.displayName}}</mat-list-item>
+                        </mat-list>
+                    </mat-expansion-panel>
+                    <mat-list *ngIf="!menu.subList">
+                        <mat-list-item [class.selected]="selected(menu.route)" [class.disabled]="disabled(menu.requiresUser)" (click)="menuSelect(menu.route, disabled(menu.requiresUser))">{{menu.displayName}}</mat-list-item>
+                    </mat-list>
+                </ng-container>
+            </mat-accordion>
+        </mat-sidenav>
+        <mat-sidenav-content class="content">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

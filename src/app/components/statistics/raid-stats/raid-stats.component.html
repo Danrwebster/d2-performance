@@ -1,27 +1,5 @@
-<div class="global-container">
-	<mat-toolbar [color]="'accent'" class="mat-elevation-z0">
-		<h1>
-			Raid Statistics
-		</h1>
-	</mat-toolbar>
-
-	<mat-chip-list #chipList>
-		<mat-chip *ngFor="let user of userList; let i = index" [color]="chipColour(i)" [removable]="'true'" (removed)="remove(user)"
-		 selected>
-			{{user.blizzardDisplayName}}
-			<mat-icon matChipRemove>cancel</mat-icon>
-		</mat-chip>
-	</mat-chip-list>
-	<div class="user-container">
-		<mat-card *ngFor="let user of userList; let i = index">
-			<mat-card-header>
-				<div mat-card-avatar class="avatar" [ngStyle]="{ 'background-image' : (BungieCMSRootPath + user.profilePicturePath) | styleURL }"></div>
-				<mat-card-title>{{user.blizzardDisplayName}}</mat-card-title>
-				<mat-card-subtitle>{{user.displayName}}</mat-card-subtitle>
-			</mat-card-header>
-			<img mat-card-image [src]="user.profileThemeName | themeBackground" />
-			<mat-card-content>
-			</mat-card-content>
-		</mat-card>
-	</div>
-</div>
+<mat-card>
+	<mat-card-header>
+		<mat-card-title>Riad Stats!</mat-card-title>
+	</mat-card-header>
+</mat-card>

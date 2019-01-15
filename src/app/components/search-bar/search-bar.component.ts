@@ -4,6 +4,8 @@ import { BungieService } from 'src/app/services/bungie.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { UserDataService } from 'src/app/services/user-data.service';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
 	selector: 'app-search-bar',
@@ -21,7 +23,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _bungieService: BungieService,
-		private _router: Router
+		private _router: Router,
+		private _menuService: MenuService
 	) { }
 
 	ngOnInit() {
@@ -41,7 +44,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 	public searchPlayer(searchTerm: string): void {
 		const playerSub = this._bungieService.getDestinyPlayer(searchTerm).subscribe(data => {
 			if (data.Response) {
-				this._router.navigate(['/stats', data.Response[0].membershipId]);
+				this._router.navigate( ['/stats', data.Response[0].membershipId, this._menuService.menuItems[0].route ]);
 			}
 		});
 		this._subscription.add(playerSub);

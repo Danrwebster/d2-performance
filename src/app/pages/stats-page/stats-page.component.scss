@@ -6,64 +6,52 @@
     display: flex;
     justify-content: stretch;
     align-items: stretch;
-}
 
-.sidenav-container {
-    flex-grow: 1;
-    
-    .sidenav {
-        background-color: $primary-dark;
-        padding: $header-large 0 0;
-
-        @include breakpoint(mobile) {
-            padding: $header-small 0 0;
-        }
-    }
-    .content {
+    .container {
+        flex-grow: 1;
+        position: relative;
         display: flex;
         flex-direction: column;
+        justify-content: stretch;
+        align-items: flex-start;
         padding: $header-large 0 0;
 
         @include breakpoint(mobile) {
             padding: $header-small 0 0;
         }
-    }    
-}
-
-mat-expansion-panel {
-    background: $primary-dark;
-
-    mat-expansion-panel-header {
-        mat-panel-title {
-            color: $primary-light;
-        }
     }
 }
 
-::ng-deep {
-    .mat-drawer-container {
-        background-color: transparent;
+.user-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+mat-card {
+    flex: 0 0 100px;
+    width: 89%;
+    max-width: 600px;
+    margin: 0 auto 16px;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    @include breakpoint(mobile) {
+        margin: 16px auto;
     }
 
-    mat-expansion-panel-header {
-        background: $primary-dark !important;
+    .avatar {
+        background-size: cover;
     }
 
-    .mat-expansion-indicator {
-        &:after {
-            color: rgba(255, 255, 255, 1) !important;
-
-            .selected & {
-                color: $primary-accent !important;
-            }
-        }
-    }
-    
-    .mat-list-item-content {
-        color: rgba(255, 255, 255, 1);
-
-        .selected & {
-            color: $primary-accent !important;
-        }
+    mat-card-title, mat-card-subtitle {
+        font-family: neue-haas-grotesk-display, sans-serif !important;
+        font-weight: bold;
+        color: white;
+        margin-bottom: 8px;
     }
 }

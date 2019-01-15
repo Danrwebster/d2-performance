@@ -27,7 +27,6 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { BungieService } from './services/bungie.service';
 import { NotificationService } from './services/notification.service';
 import { HttpClientModule } from '@angular/common/http';
-import { StatsPageComponent } from './pages/stats-page/stats-page.component';
 import { ThemeBackgroundPipe } from './pipes/theme-background.pipe';
 import { StyleURLPipe } from './pipes/style-url.pipe';
 import { RaidStatsComponent } from './components/statistics/raid-stats/raid-stats.component';
@@ -42,6 +41,8 @@ import { IronBannerStatsComponent } from './components/statistics/iron-banner-st
 import { TrialsStatsComponent } from './components/statistics/trials-stats/trials-stats.component';
 import { AllPvpStatsComponent } from './components/statistics/all-pvp-stats/all-pvp-stats.component';
 import { GambitStatsComponent } from './components/statistics/gambit-stats/gambit-stats.component';
+import { StatsPageComponent } from './pages/stats-page/stats-page.component';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
 
 @NgModule({
 	declarations: [
@@ -49,7 +50,6 @@ import { GambitStatsComponent } from './components/statistics/gambit-stats/gambi
 		NavBarComponent,
 		HomePageComponent,
 		SearchBarComponent,
-		StatsPageComponent,
 		ThemeBackgroundPipe,
 		StyleURLPipe,
 		RaidStatsComponent,
@@ -62,7 +62,9 @@ import { GambitStatsComponent } from './components/statistics/gambit-stats/gambi
 		IronBannerStatsComponent,
 		TrialsStatsComponent,
 		AllPvpStatsComponent,
-		GambitStatsComponent
+		GambitStatsComponent,
+		StatsPageComponent,
+		AboutPageComponent
 	],
 	imports: [
 		BrowserModule,

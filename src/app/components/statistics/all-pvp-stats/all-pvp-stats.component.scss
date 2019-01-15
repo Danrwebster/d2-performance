@@ -1,7 +1,23 @@
 @import "../../../../assets/styles/variables";
 @import "../../../../assets/styles/mixins";
 
-.global-container {
+mat-card {
+    flex: 0 0 100px;
+    width: 89%;
+    max-width: 600px;
+    margin: 0 auto 16px;
+    background-size: cover;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    @include breakpoint(mobile) {
+        margin: 16px auto;
+    }
+
+    mat-card-title, mat-card-subtitle {
+        font-family: neue-haas-grotesk-display, sans-serif !important;
+        font-weight: bold;
+    }
 }
