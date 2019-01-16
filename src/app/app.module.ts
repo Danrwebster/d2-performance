@@ -43,6 +43,7 @@ import { AllPvpStatsComponent } from './components/statistics/all-pvp-stats/all-
 import { GambitStatsComponent } from './components/statistics/gambit-stats/gambit-stats.component';
 import { StatsPageComponent } from './pages/stats-page/stats-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
+import { FocusDirective } from './directives/focus.directive';
 
 @NgModule({
 	declarations: [
@@ -64,7 +65,8 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 		AllPvpStatsComponent,
 		GambitStatsComponent,
 		StatsPageComponent,
-		AboutPageComponent
+		AboutPageComponent,
+		FocusDirective
 	],
 	imports: [
 		BrowserModule,
