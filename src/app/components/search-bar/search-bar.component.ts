@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BungieService } from 'src/app/services/bungie.service';
 import { Router, NavigationEnd } from '@angular/router';
@@ -25,6 +25,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 	private _subscription = new Subscription;
 
 	@Output() close = new EventEmitter<boolean>();
+	@ViewChild('playerSearch') inputField: ElementRef;
 
 	constructor(
 		private _bungieService: BungieService,

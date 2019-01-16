@@ -2,7 +2,7 @@
 <mat-toolbar [color]="'white'" class="mat-elevation-z4" (click)="handleClick()">
 	<mat-toolbar-row>
 		<mat-form-field [color]="'accent'" [floatLabel]="'never'">
-			<input matInput #playerSearch type="text" placeholder="Search for a Guardian" [formControl]="myControl" [matAutocomplete]="auto" (keyup.enter)="searchPlayer(playerSearch.value)">
+			<input matInput autofocus #playerSearch type="text" placeholder="Search for a Guardian" [formControl]="myControl" [matAutocomplete]="auto" (keyup.enter)="searchPlayer(playerSearch.value)">
 			<mat-icon matSuffix (click)="searchPlayer(playerSearch.value)">search</mat-icon>
 		</mat-form-field>
 		<mat-autocomplete #auto="matAutocomplete">
