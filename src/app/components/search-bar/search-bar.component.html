@@ -6,7 +6,9 @@
 			<mat-icon matSuffix (click)="searchPlayer(playerSearch.value)">search</mat-icon>
 		</mat-form-field>
 		<mat-autocomplete #auto="matAutocomplete">
-			<mat-option *ngFor="let option of options" [value]="option" (click)="searchPlayer(option)">{{option}}</mat-option>
+			<ng-container *ngFor="let option of options">
+				<mat-option *ngIf="showUser(option)" [value]="getUserName(option)" (click)="getPlayer(getUserName(option))">{{getUserName(option)}}<span class="platform">{{getPlatformName(option)}}</span></mat-option>
+			</ng-container>
 		</mat-autocomplete>
 	</mat-toolbar-row>
 </mat-toolbar>

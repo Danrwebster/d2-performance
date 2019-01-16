@@ -9,7 +9,9 @@ export interface IBungieAPIResponse {
 
 export interface IBungieNetUser {
 	about: string;
-	blizzardDisplayName: string;
+	blizzardDisplayName?: string;
+	xboxDisplayName?: string;
+	psnDisplayName?: string;
 	displayName: string;
 	firstAccess: string;
 	isDeleted: boolean;

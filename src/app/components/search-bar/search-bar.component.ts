@@ -4,8 +4,13 @@ import { BungieService } from 'src/app/services/bungie.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { UserDataService } from 'src/app/services/user-data.service';
+import { IBungieNetUser } from 'src/app/bungie-api-shared/bungie-api-interfaces';
 import { MenuService } from 'src/app/services/menu.service';
+
+interface IUserName {
+	displayName: string;
+	platformName: string;
+}
 
 @Component({
 	selector: 'app-search-bar',
@@ -15,7 +20,7 @@ import { MenuService } from 'src/app/services/menu.service';
 export class SearchBarComponent implements OnInit, OnDestroy {
 
 	public myControl = new FormControl();
-	public options: string[] = ['lafindumonde#1607', 'melllvar#1973', 'kigor#11425'];
+	public options: IBungieNetUser[] = [];
 
 	private _subscription = new Subscription;
 
@@ -42,12 +47,24 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 	}
 
 	public searchPlayer(searchTerm: string): void {
-		const playerSub = this._bungieService.getDestinyPlayer(searchTerm).subscribe(data => {
+		const playerSearchSub = this._bungieService.searchBungieUsers(searchTerm).subscribe(data => {
 			if (data.Response) {
-				this._router.navigate( ['/stats', data.Response[0].membershipId, this._menuService.menuItems[0].route ]);
+				this.options = data.Response;
+				if (this.options.length === 1) {
+					this.getPlayer(this.getUserName(this.options[0]));
+				}
 			}
 		});
-		this._subscription.add(playerSub);
+		this._subscription.add(playerSearchSub);
+	}
+
+	public getPlayer(userName: string): void {
+		const getPlayerSub = this._bungieService.getDestinyPlayer(userName).subscribe(data => {
+			if (data.Response) {
+				this._router.navigate(['/stats', data.Response[0].membershipId, this._menuService.menuItems[0].route]);
+			}
+		});
+		this._subscription.add(getPlayerSub);
 	}
 
 	public closeSearch(): void {
@@ -56,5 +73,45 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
 	public handleClick(): void {
 		event.stopPropagation();
+	}
+
+	public getPlatformName(user: IBungieNetUser): string {
+		if (user.blizzardDisplayName) {
+			return 'PC';
+		}
+		if (user.xboxDisplayName) {
+			return 'XBOX';
+		}
+		if (user.psnDisplayName) {
+			return 'PSN';
+		}
+	}
+
+	public getUserName(user: IBungieNetUser): string {
+		if (user.blizzardDisplayName) {
+			return user.blizzardDisplayName;
+		}
+		if (user.xboxDisplayName) {
+			return user.xboxDisplayName;
+		}
+		if (user.psnDisplayName) {
+			return user.psnDisplayName;
+		}
+	}
+
+	public showUser(user: IBungieNetUser): boolean {
+		let platformDefined = false;
+
+		if (user.blizzardDisplayName) {
+			platformDefined = true;
+		}
+		if (user.xboxDisplayName) {
+			platformDefined = true;
+		}
+		if (user.psnDisplayName) {
+			platformDefined = true;
+		}
+
+		return platformDefined;
 	}
 }

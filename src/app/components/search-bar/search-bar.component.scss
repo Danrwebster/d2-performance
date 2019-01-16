@@ -34,6 +34,17 @@ mat-form-field {
     width: 300px;
 }
 
+::ng-deep {
+    .mat-option-text {
+        display: flex !important;
+    
+        .platform {
+            font-weight: bold;
+            margin-left: auto;
+        }
+    }
+}
+
 @keyframes appear {
     0%   {
         opacity: 0;

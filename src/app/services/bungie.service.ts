@@ -30,7 +30,7 @@ export class BungieService {
 			);
 	}
 
-	public getBungieUser(searchTerm: string): Observable<IBungieAPIResponse> {
+	public searchBungieUsers(searchTerm: string): Observable<IBungieAPIResponse> {
 		const query = BUNGIE_ROOT_API + BUNGIE_USER_SEARCH;
 		const httpParams = new HttpParams()
 			.set('q', searchTerm);
