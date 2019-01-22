@@ -7,16 +7,16 @@
 			<mat-list class="stats-list" *ngIf="showStats">
 				<mat-divider></mat-divider>
 				<mat-list-item>
-					<p>{{generalStats.kills.statId}}</p>
-					<p>{{generalStats.kills.basic.displayValue}}</p>
+					<p>{{generalStats.kills.statId }}</p>
+					<p>{{generalStats.kills.basic.displayValue | number: '2.'}}</p>
 				</mat-list-item>
 				<mat-list-item>
 					<p>{{generalStats.assists.statId}}</p>
-					<p>{{generalStats.assists.basic.displayValue}}</p>
+					<p>{{generalStats.assists.basic.displayValue | number: '2.'}}</p>
 				</mat-list-item>
 				<mat-list-item>
 					<p>{{generalStats.precisionKills.statId}}</p>
-					<p>({{generalStats.precisionKills.basic.displayValue}})
+					<p>({{generalStats.precisionKills.basic.displayValue | number: '2.'}})
 						<span class="percentage">
 							{{precisionRatio(generalStats.precisionKills.basic.value,
 							generalStats.kills.basic.value)}}%
@@ -25,11 +25,11 @@
 				<mat-divider></mat-divider>
 				<mat-list-item>
 					<p>{{generalStats.deaths.statId}}</p>
-					<p>{{generalStats.deaths.basic.displayValue}}</p>
+					<p>{{generalStats.deaths.basic.displayValue | number: '2.'}}</p>
 				</mat-list-item>
 				<mat-list-item>
 					<p>{{generalStats.suicides.statId}}</p>
-					<p>({{generalStats.suicides.basic.displayValue}})
+					<p>({{generalStats.suicides.basic.displayValue | number: '2.'}})
 						<span class="percentage">
 							{{precisionRatio(generalStats.suicides.basic.value,
 							generalStats.deaths.basic.value)}}%
