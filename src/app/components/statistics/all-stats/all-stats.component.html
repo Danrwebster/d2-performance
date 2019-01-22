@@ -53,6 +53,15 @@
 	</mat-card>
 
 	<mat-card>
+		<mat-card-header>
+			<mat-card-title>Kills by Weapon</mat-card-title>
+		</mat-card-header>
+		<mat-card-content>
+			<google-chart #weaponKillChart [data]="weaponTypeKills" *ngIf="showStats" (chartReady)='chartReady($event)'></google-chart>
+		</mat-card-content>
+	</mat-card>
+
+	<mat-card>
 		<mat-accordion [displayMode]="'flat'">
 			<mat-expansion-panel class="mat-elevation-z0">
 				<mat-expansion-panel-header>

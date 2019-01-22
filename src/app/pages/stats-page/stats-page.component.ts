@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IMembershipProfile, IBungieNetUser } from 'src/app/bungie-api-shared/bungie-api-interfaces';
 import { BUNGIE_CMS_ROOT } from 'src/app/bungie-api-shared/bungie-api-endpoints';
-import { Subscription } from 'rxjs';
+import { Subscription, merge } from 'rxjs';
 import { BungieService } from 'src/app/services/bungie.service';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { UserDataService } from 'src/app/services/user-data.service';
@@ -33,7 +33,15 @@ export class StatsPageComponent implements OnInit, OnDestroy {
 		});
 		this._subscription.add(showSelectedSub);
 
-		const routeSub = this._router.events.pipe(filter(event => event instanceof NavigationEnd))
+		const paramSub = merge(this._route.queryParams, this._route.paramMap)
+		.subscribe(() => {
+			this._currentUser = this._route.snapshot.data.MembershipProfile;
+		});
+
+		this._subscription.add(paramSub);
+
+		const routeSub = this._router.events
+			.pipe(filter(event => event instanceof NavigationEnd))
 			.subscribe(() => {
 				this._currentUser = this._route.snapshot.data.MembershipProfile;
 			});

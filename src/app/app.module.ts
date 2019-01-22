@@ -45,6 +45,7 @@ import { GambitStatsComponent } from './components/statistics/gambit-stats/gambi
 import { StatsPageComponent } from './pages/stats-page/stats-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { FocusDirective } from './directives/focus.directive';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 @NgModule({
 	declarations: [
@@ -89,7 +90,8 @@ import { FocusDirective } from './directives/focus.directive';
 		MatChipsModule,
 		MatIconModule,
 		MatSnackBarModule,
-		HttpClientModule
+		HttpClientModule,
+		Ng2GoogleChartsModule
 	],
 	providers: [
 		BungieService,
