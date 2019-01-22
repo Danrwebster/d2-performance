@@ -4,7 +4,15 @@ import { NotificationService } from './notification.service';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { IBungieAPIResponse } from '../bungie-api-shared/bungie-api-interfaces';
-import { BUNGIE_ROOT_API, DESTINY_PLAYER_SEARCH, BUNGIE_USER_SEARCH, MEMBERSHIP_INFO } from '../bungie-api-shared/bungie-api-endpoints';
+import {
+	BUNGIE_ROOT_API,
+	DESTINY_PLAYER_SEARCH,
+	BUNGIE_USER_SEARCH,
+	MEMBERSHIP_INFO,
+	GENERAL_STATS_1,
+	GENERAL_STATS_2,
+	GENERAL_STATS_3
+} from '../bungie-api-shared/bungie-api-endpoints';
 import { BUNGIE_APIKEY } from '../bungie-api-shared/bungie-api-key';
 
 export interface IHttpOptions {
@@ -40,12 +48,20 @@ export class BungieService {
 			);
 	}
 
-	public getMembershipInfo(membershipID: string, platform?: string): Observable<IBungieAPIResponse> {
+	public getMembershipInfo(membershipID: string, platform?: number): Observable<IBungieAPIResponse> {
 		const platformQuery = platform ? platform : '-1';
 		const query = BUNGIE_ROOT_API + MEMBERSHIP_INFO + encodeURIComponent(membershipID) + '/' + platformQuery + '/';
 		return this.http.get<any>(query, { headers: this.buildHttpHeaders() })
 			.pipe(
 				catchError(this.handleError('getMembershipInfo', []))
+			);
+	}
+
+	public getGeneralStats(membershipID: string, platform: number): Observable<IBungieAPIResponse> {
+		const query = BUNGIE_ROOT_API + GENERAL_STATS_1 + platform + GENERAL_STATS_2 + encodeURIComponent(membershipID) + GENERAL_STATS_3;
+		return this.http.get<any>(query, { headers: this.buildHttpHeaders() })
+			.pipe(
+				catchError(this.handleError('getGeneralStats', []))
 			);
 	}
 

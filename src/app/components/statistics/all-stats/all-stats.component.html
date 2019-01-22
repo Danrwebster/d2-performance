@@ -1,7 +1,72 @@
 <div class="container">
 	<mat-card>
 		<mat-card-header>
-			<mat-card-title>All Stats!</mat-card-title>
+			<mat-card-title>Kills & Deaths</mat-card-title>
 		</mat-card-header>
+		<mat-card-content>
+			<mat-list class="stats-list" *ngIf="showStats">
+				<mat-divider></mat-divider>
+				<mat-list-item>
+					<p>{{generalStats.kills.statId}}</p>
+					<p>{{generalStats.kills.basic.displayValue}}</p>
+				</mat-list-item>
+				<mat-list-item>
+					<p>{{generalStats.assists.statId}}</p>
+					<p>{{generalStats.assists.basic.displayValue}}</p>
+				</mat-list-item>
+				<mat-list-item>
+					<p>{{generalStats.precisionKills.statId}}</p>
+					<p>({{generalStats.precisionKills.basic.displayValue}})
+						<span class="percentage">
+							{{precisionRatio(generalStats.precisionKills.basic.value,
+							generalStats.kills.basic.value)}}%
+						</span></p>
+				</mat-list-item>
+				<mat-divider></mat-divider>
+				<mat-list-item>
+					<p>{{generalStats.deaths.statId}}</p>
+					<p>{{generalStats.deaths.basic.displayValue}}</p>
+				</mat-list-item>
+				<mat-list-item>
+					<p>{{generalStats.suicides.statId}}</p>
+					<p>({{generalStats.suicides.basic.displayValue}})
+						<span class="percentage">
+							{{precisionRatio(generalStats.suicides.basic.value,
+							generalStats.deaths.basic.value)}}%
+						</span></p>
+				</mat-list-item>
+				<mat-divider></mat-divider>
+				<mat-list-item>
+					<p>{{generalStats.killsDeathsRatio.statId}}</p>
+					<p><span class="percentage">
+							{{generalStats.killsDeathsRatio.basic.displayValue}}%
+						</span></p>
+				</mat-list-item>
+				<mat-list-item>
+					<p>{{generalStats.killsDeathsAssists.statId}}</p>
+					<p><span class="percentage">
+							{{generalStats.killsDeathsAssists.basic.displayValue}}%
+						</span></p>
+				</mat-list-item>
+			</mat-list>
+		</mat-card-content>
+	</mat-card>
+
+	<mat-card>
+		<mat-accordion [displayMode]="'flat'">
+			<mat-expansion-panel class="mat-elevation-z0">
+				<mat-expansion-panel-header>
+					<mat-panel-title>
+						All Stats as a List
+					</mat-panel-title>
+				</mat-expansion-panel-header>
+				<mat-list class="stats-list" *ngIf="showStats">
+					<mat-list-item *ngFor="let stat of mergedStats">
+						<p>{{stat.statId}}</p>
+						<p>{{stat.basic.displayValue}}</p>
+					</mat-list-item>
+				</mat-list>
+			</mat-expansion-panel>
+		</mat-accordion>
 	</mat-card>
 </div>

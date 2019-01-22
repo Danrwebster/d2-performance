@@ -4,6 +4,7 @@
 .global-container {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: stretch;
     align-items: stretch;
 
@@ -12,8 +13,8 @@
         position: relative;
         display: flex;
         flex-direction: column;
-        justify-content: stretch;
-        align-items: flex-start;
+        justify-content: flex-start;
+        align-items: stretch;
         padding: $header-large 0 0;
 
         @include breakpoint(mobile) {

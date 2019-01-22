@@ -15,7 +15,7 @@
 }
 
 mat-card {
-    flex: 0 0 100px;
+    flex: 0 0 auto;
     width: 89%;
     max-width: 600px;
     margin: 0 auto 16px;
@@ -28,5 +28,22 @@ mat-card {
     mat-card-title, mat-card-subtitle {
         font-family: neue-haas-grotesk-display, sans-serif !important;
         font-weight: bold;
+    }
+
+    mat-card-content {
+        width: 100%;
+    }
+}
+
+::ng-deep {
+    .stats-list {
+        .mat-list-item-content {
+            color: $primary-dark !important;
+            justify-content: space-between;
+
+            .percentage {
+                color: $primary-accent !important;
+            }
+        }
     }
 }

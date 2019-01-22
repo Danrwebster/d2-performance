@@ -10,7 +10,7 @@
 
 .sidenav-container {
     flex-grow: 1;
-    
+
     .sidenav {
         background-color: $primary-dark;
         padding: $header-large 0 0;
@@ -19,10 +19,11 @@
             padding: $header-small 0 0;
         }
     }
+
     .content {
         display: flex;
         flex-direction: column;
-    }    
+    }
 }
 
 mat-expansion-panel {
@@ -36,37 +37,41 @@ mat-expansion-panel {
 }
 
 ::ng-deep {
-    .mat-drawer-container {
-        background-color: transparent;
-    }
+    .sidenav {
+        .mat-drawer-container {
+            background-color: transparent;
+        }
 
-    mat-expansion-panel-header {
-        background: $primary-dark !important;
-    }
+        mat-expansion-panel-header {
+            background: $primary-dark !important;
+        }
 
-    .mat-expansion-indicator {
-        &:after {
-            color: rgba(255, 255, 255, 1) !important;
+        .mat-expansion-indicator {
+            &:after {
+                color: rgba(255, 255, 255, 1) !important;
 
-            .selected & {
+                .selected & {
+                    color: $primary-accent !important;
+                }
+
+                .disabled & {
+                    opacity: 0.5;
+                }
+            }
+        }
+
+        .mat-list-item-content {
+            color: rgba(255, 255, 255, 1);
+        }
+
+        .disabled {
+            opacity: 0.5;
+        }
+
+        .selected {
+            .mat-list-item-content {
                 color: $primary-accent !important;
             }
-
-            .disabled & {
-                opacity: 0.5;
-            }
-        }
-    }
-    
-    .mat-list-item-content {
-        color: rgba(255, 255, 255, 1);
-
-        .selected & {
-            color: $primary-accent !important;
-        }
-
-        .disabled & {
-            opacity: 0.5;
         }
     }
 }
