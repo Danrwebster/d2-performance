@@ -43,6 +43,11 @@ mat-form-field {
             margin-left: auto;
         }
     }
+
+    .mat-form-field-suffix {
+        align-self: flex-end;
+        margin-bottom: 2px;
+    }
 }
 
 @keyframes appear {

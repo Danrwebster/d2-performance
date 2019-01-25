@@ -96,6 +96,11 @@ export class AllStatsComponent implements OnInit, OnDestroy {
 		return Math.round((pKills / kills) * 10000) / 100 + '';
 	}
 
+	public killsPerHour(kills: number, seconds: number): string {
+		const hours = (seconds / 60) / 60;
+		return Math.round((kills / hours) * 10) / 10 + '';
+	}
+
 	public initChartData() {
 		this._weaponTypeKills.dataTable = [
 			[
