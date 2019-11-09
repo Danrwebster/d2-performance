@@ -22,7 +22,7 @@ interface IGoogleChartData {
 })
 export class AllStatsComponent implements OnInit, OnDestroy {
 
-	@ViewChild('weaponKillChart') weaponKillChart;
+	@ViewChild('weaponKillChart', { static: false }) weaponKillChart;
 
 	private _currentUser: IMembershipProfile;
 	private _subscription = new Subscription;

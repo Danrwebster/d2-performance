@@ -25,7 +25,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 	private _subscription = new Subscription;
 
 	@Output() close = new EventEmitter<boolean>();
-	@ViewChild('playerSearch') inputField: ElementRef;
+	@ViewChild('playerSearch', { static: true }) inputField: ElementRef;
 
 	constructor(
 		private _bungieService: BungieService,
